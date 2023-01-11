@@ -6,15 +6,11 @@ import { Rover } from "./rover";
 
 import {XYPosition,RoverPosition, GridSize} from "./types"
 
-
-
-
-
-export function createPlateauCmd (size :GridSize) : Grid {
-    return new Grid(size.x, size.y);
+export function setPlateauSizeCmd (size :GridSize){
+    Rover.plateau.setSize(size);
 }
 
-export function placeRoverOnMars(position : RoverPosition) : RoverPosition{
+export function placeRoverOnMarsCmd(position : RoverPosition) : RoverPosition{
     const rover = new Rover(position);
     return rover.getPosition();
 }
