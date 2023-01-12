@@ -72,7 +72,7 @@ describe("Place Rover cmd", () => {
   });
 });
 
-describe("Check Rover move", () => {
+describe("Check Rover Rotate Left", () => {
   it("turn Rover Left from North", () => {
     placeRoverOnMarsCmd({ x: 0, y: 0, facing: "N" });
     expect(moveRoverCmd(["L"])).toEqual({ x: 0, y: 0, facing: "W" });
@@ -91,5 +91,27 @@ describe("Check Rover move", () => {
   it("turn  Rover Left", () => {
     placeRoverOnMarsCmd({ x: 4, y: 4, facing: "E" });
     expect(moveRoverCmd(["L"])).toEqual({ x: 4, y: 4, facing: "N" });
+  });
+});
+
+describe("Check Rover roatte Right", () => {
+  it("turn Rover right from North", () => {
+    placeRoverOnMarsCmd({ x: 1, y: 0, facing: "N" });
+    expect(moveRoverCmd(["R"])).toEqual({ x: 1, y: 0, facing: "E" });
+  });
+
+  it("turn  Rover Left", () => {
+    placeRoverOnMarsCmd({ x: 0, y: 3, facing: "W" });
+    expect(moveRoverCmd(["R"])).toEqual({ x: 0, y: 3, facing: "N" });
+  });
+
+  it("turn  Rover Left", () => {
+    placeRoverOnMarsCmd({ x: 2, y: 1, facing: "S" });
+    expect(moveRoverCmd(["R"])).toEqual({ x: 2, y: 1, facing: "W" });
+  });
+
+  it("turn  Rover Left", () => {
+    placeRoverOnMarsCmd({ x: 3, y: 1, facing: "E" });
+    expect(moveRoverCmd(["R"])).toEqual({ x: 3, y: 1, facing: "S" });
   });
 });
