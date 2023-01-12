@@ -5,7 +5,17 @@ import { XYPosition, RoverPosition, Move, Direction, Rotate } from "./types";
 export class Rover {
   static plateau = new Grid();
 
+  static currentRover : Rover;
+
   private readonly rotateDirn: Direction[] = ["N", "E", "S", "W"];
+
+  static getCurrentRover(): Rover {
+    return Rover.currentRover;
+  }
+
+  static SetCurrentRover(rover:Rover) {
+    Rover.currentRover = rover;
+  }
 
   position: RoverPosition;
 
@@ -15,6 +25,7 @@ export class Rover {
     } else {
       this.position = { x: 0, y: 0, facing: position.facing };
     }
+    Rover.currentRover = this;
   }
 
   getPosition() {
@@ -73,7 +84,11 @@ export class Rover {
       //** raise error here */
     }
 
-    this.position.x = currentPosition.x;
-    this.position.y = currentPosition.y;
+    if (Rover.plateau.isWithin(currentPosition)) {
+      this.position.x = currentPosition.x;
+      this.position.y = currentPosition.y;
+    } else {
+      // out of limits - raise error ?
+    }
   }
 }
