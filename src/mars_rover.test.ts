@@ -4,6 +4,7 @@ import {
   moveRoverCmd,
 } from "./interface_controller";
 import { Rover } from "./rover";
+import{Move} from "./types";
 
 describe("Check Plateau Creation cmd", () => {
   it("create and size plateau", () => {
@@ -48,7 +49,7 @@ describe("Place Rover cmd", () => {
   });
 
   it("Place Rover outside plateau limits - both X and Y exceed limit", () => {
-    expect(placeRoverOnMarsCmd({ x: 5, y: 5, facing: "N" })).toEqual({
+    expect(placeRoverOnMarsCmd({ x: 6, y: 6, facing: "N" })).toEqual({
       x: 0,
       y: 0,
       facing: "N",
@@ -56,7 +57,7 @@ describe("Place Rover cmd", () => {
   });
 
   it("Place Rover outside plateau limits -  X  exceed limit", () => {
-    expect(placeRoverOnMarsCmd({ x: 5, y: 4, facing: "E" })).toEqual({
+    expect(placeRoverOnMarsCmd({ x: 6, y: 4, facing: "E" })).toEqual({
       x: 0,
       y: 0,
       facing: "E",
@@ -64,7 +65,7 @@ describe("Place Rover cmd", () => {
   });
 
   it("Place Rover outside plateau limits -  X  exceed limit", () => {
-    expect(placeRoverOnMarsCmd({ x: 0, y: 6, facing: "S" })).toEqual({
+    expect(placeRoverOnMarsCmd({ x: 0, y: 7, facing: "S" })).toEqual({
       x: 0,
       y: 0,
       facing: "S",
@@ -117,7 +118,7 @@ describe("Check Rover roatte Right", () => {
 });
 
 
-describe("Check Rover move t", () => {
+describe("Check Rover move ", () => {
   it("Move North", () => {
     placeRoverOnMarsCmd({ x: 1, y: 0, facing: "N" });
     expect(moveRoverCmd(["M"])).toEqual({ x: 1, y: 1, facing: "N" });
@@ -136,6 +137,41 @@ describe("Check Rover move t", () => {
   it("Move West", () => {
     placeRoverOnMarsCmd({ x: 1, y: 3, facing: "W" });
     expect(moveRoverCmd(["M"])).toEqual({ x: 0, y: 3, facing: "W" });
+  });
+
+  it("Move North  - dont go out of plateau limit", () => {
+    placeRoverOnMarsCmd({ x: 5, y: 5, facing: "N" });
+    expect(moveRoverCmd(["M"])).toEqual({ x: 5, y: 5, facing: "N" });
+  });
+
+  it("Move Esat  - dont go out of plateau limit", () => {
+    placeRoverOnMarsCmd({ x: 5, y: 4, facing: "E" });
+    expect(moveRoverCmd(["M"])).toEqual({ x: 5, y: 4, facing: "E" });
+  });
+
+  it("Move South - dont go out of plateau limit", () => {
+    placeRoverOnMarsCmd({ x: 3, y: 0, facing: "S" });
+    expect(moveRoverCmd(["M"])).toEqual({ x: 3, y: 0, facing: "S" });
+  });
+
+  it("Move West - dont go out of plateau limit", () => {
+    placeRoverOnMarsCmd({ x: 0, y: 2, facing: "W" });
+    expect(moveRoverCmd(["M"])).toEqual({ x: 0, y: 2, facing: "W" });
+  });
+
+});
+
+describe("Check Rover move and Turn", () => {
+  it("Move and Turn 1", () => {
+    setPlateauSizeCmd({ x: 5, y: 5 })
+    placeRoverOnMarsCmd({ x: 1, y: 2, facing: "N" });
+    expect(moveRoverCmd(["L","M","L","M","L","M","L","M","M"])).toEqual({ x: 1, y: 3, facing: "N" });
+  });
+
+  it("Move and Turn 1", () => {
+    setPlateauSizeCmd({ x: 5, y: 5 })
+    placeRoverOnMarsCmd({ x: 3, y: 3, facing: "E" });
+    expect(moveRoverCmd(["M","M","R","M","M","R","M","R","R","M"])).toEqual({ x: 5, y: 1, facing: "E" });
   });
 
 });
