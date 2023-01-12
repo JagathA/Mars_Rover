@@ -17,6 +17,6 @@ export class Grid {
 
   isWithin(position: XYPosition): boolean {
 
-    return position.x < this.size.x && position.y < this.size.y;
+    return (position.x <= this.size.x && position.y <= this.size.y) && (position.x >= 0 && position.y >= 0);
   }
 }
