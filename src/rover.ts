@@ -5,10 +5,8 @@ import { RoverPosition, Move, Direction, Rotate } from "./types";
 export class Rover {
   static plateau = new Grid();
 
-  private readonly rotateRightDirn: Direction[] = 
-    ["N", "E", "S", "W"];
-    private readonly rotateLeftDirn: Direction[] = 
-    ["N", "W", "S", "E"];
+  private readonly rotateDirn: Direction[] = ["N", "E", "S", "W"];
+  private readonly rotateLeftDirn: Direction[] = ["N", "W", "S", "E"];
   //[["N", "E"], ["E", "S"], ["S", "W"],["W", "N"]]
 
   position: RoverPosition;
@@ -28,53 +26,26 @@ export class Rover {
 
   move(cmd: Move[]): RoverPosition {
     let nowPosition: RoverPosition;
-    cmd.forEach((moveCmd) => {
-      if (moveCmd === "L") {
-        console.log("******Turning left");
-        this.rotateLeft();
-      }
-      else if (moveCmd ==="R") {
-         this.rotateRight();
+    cmd.forEach((step) => {
+      if (step === "L" || step === "R") {
+        this.rotate(step);
       }
       // else {move()};
     });
-    //this.position = {x:5, y:4, facing:"N"}
     return this.position;
   }
 
-  private rotateLeft() {
-
-    // this.rotateLeftDirn.map((item, index) => {
+  private rotate(dirn: Rotate) {
+    let rotateOffset: number = 0;
     
+    if (dirn === "R") {      // *** can improve here
+      rotateOffset = 1;
+    } else {
+      rotateOffset = this.rotateDirn.length - 1;
+    }
 
-    let index = this.rotateLeftDirn.indexOf(this.position.facing);
-    // console.log(" facing ******=>", this.position.facing);
-    // console.log(" index ******=>", index);
-    index = (index+1)%this.rotateLeftDirn.length;
-    // console.log(" index wrap ******=>", index);
-    this.position.facing = this.rotateLeftDirn[index];
-    
-
-    // console.log(" new dirn ******=>", this.position.facing);
+    let index = this.rotateDirn.indexOf(this.position.facing);
+    index = (index + rotateOffset) % this.rotateDirn.length;
+    this.position.facing = this.rotateDirn[index];
   }
-
-  private rotateRight() {
-
-    // this.rotateLeftDirn.map((item, index) => {
-    
-
-    let index = this.rotateLeftDirn.indexOf(this.position.facing);
-    // console.log(" facing ******=>", this.position.facing);
-    // console.log(" index ******=>", index);
-    index = (index+3)%this.rotateLeftDirn.length;
-    // console.log(" index wrap ******=>", index);
-    this.position.facing = this.rotateLeftDirn[index];
-    
-
-    // console.log(" new dirn ******=>", this.position.facing);
-  }
-
-  
-
-
 }
