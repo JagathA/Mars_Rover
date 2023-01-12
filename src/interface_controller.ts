@@ -4,13 +4,20 @@ import { Rover } from "./rover";
 // type XCoords = Coords;
 // type YCoords = Coords;
 
-import {XYPosition,RoverPosition, GridSize} from "./types"
+import {XYPosition,RoverPosition, GridSize, Move} from "./types"
+
+let currentRover : Rover;  // Bad !need to remove this global varaiable later
 
 export function setPlateauSizeCmd (size :GridSize){
     Rover.plateau.setSize(size);
 }
 
 export function placeRoverOnMarsCmd(position : RoverPosition) : RoverPosition{
-    const rover = new Rover(position);
-    return rover.getPosition();
+    currentRover = new Rover(position);
+    return currentRover.getPosition();
+}
+
+export function moveRoverCmd(cmd : Move[]) : RoverPosition{
+   
+    return currentRover.move(cmd);
 }
