@@ -16,8 +16,6 @@ export class Grid {
   }
 
   isWithin(position: XYPosition): boolean {
-    console.log("*****rover  postion =>",position );
-    console.log("*****grid  size =>",this.size )
 
     return position.x < this.size.x && position.y < this.size.y;
   }
