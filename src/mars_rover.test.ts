@@ -115,3 +115,27 @@ describe("Check Rover roatte Right", () => {
     expect(moveRoverCmd(["R"])).toEqual({ x: 3, y: 1, facing: "S" });
   });
 });
+
+
+describe("Check Rover move t", () => {
+  it("Move North", () => {
+    placeRoverOnMarsCmd({ x: 1, y: 0, facing: "N" });
+    expect(moveRoverCmd(["M"])).toEqual({ x: 1, y: 1, facing: "N" });
+  });
+
+  it("Move South", () => {
+    placeRoverOnMarsCmd({ x: 3, y: 4, facing: "S" });
+    expect(moveRoverCmd(["M"])).toEqual({ x: 3, y: 3, facing: "S" });
+  });
+
+  it("Move East", () => {
+    placeRoverOnMarsCmd({ x: 3, y: 4, facing: "E" });
+    expect(moveRoverCmd(["M"])).toEqual({ x: 4, y: 4, facing: "E" });
+  });
+
+  it("Move West", () => {
+    placeRoverOnMarsCmd({ x: 1, y: 3, facing: "W" });
+    expect(moveRoverCmd(["M"])).toEqual({ x: 0, y: 3, facing: "W" });
+  });
+
+});
