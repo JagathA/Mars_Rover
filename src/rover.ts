@@ -33,9 +33,9 @@ export class Rover {
         console.log("******Turning left");
         this.rotateLeft();
       }
-      // else if (moveCmd ==="R") {
-      //   this.rotateRight();
-      // }
+      else if (moveCmd ==="R") {
+         this.rotateRight();
+      }
       // else {move()};
     });
     //this.position = {x:5, y:4, facing:"N"}
@@ -58,15 +58,23 @@ export class Rover {
     // console.log(" new dirn ******=>", this.position.facing);
   }
 
+  private rotateRight() {
 
-  // private rotateRight() {
-  //   //this.position.facing = this.rotate.map((item=>){
+    // this.rotateLeftDirn.map((item, index) => {
+    
 
-  //  // })
-  //  this.position.facing = this.rotate[1][0];
-  // }
+    let index = this.rotateLeftDirn.indexOf(this.position.facing);
+    // console.log(" facing ******=>", this.position.facing);
+    // console.log(" index ******=>", index);
+    index = (index+3)%this.rotateLeftDirn.length;
+    // console.log(" index wrap ******=>", index);
+    this.position.facing = this.rotateLeftDirn[index];
+    
 
-  // private move(){
+    // console.log(" new dirn ******=>", this.position.facing);
+  }
 
-  // }
+  
+
+
 }
