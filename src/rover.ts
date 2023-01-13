@@ -1,10 +1,9 @@
 import { Grid } from "./grid";
-import { setPlateauSizeCmd } from "./interface_controller";
+//import { setPlateauSizeCmd } from "./interface_controller";
 import { XYPosition, RoverPosition, Move, Direction, Rotate } from "./types";
+import{ ThingOnMars} from"./thing_on_mars";
 
-export class Rover {
-  static plateau = new Grid();
-
+export class Rover extends ThingOnMars{
   static currentRover : Rover;
 
   private readonly rotateDirn: Direction[] = ["N", "E", "S", "W"];
@@ -17,19 +16,18 @@ export class Rover {
     Rover.currentRover = rover;
   }
 
-  position: RoverPosition;
+  facing : Direction;
+
 
   constructor(position: RoverPosition) {
-    if (Rover.plateau.isWithin(position)) {
-      this.position = position;
-    } else {
-      this.position = { x: 0, y: 0, facing: position.facing };
-    }
+    let InitialPosition : XYPosition = {x: position.x, y:position.y};
+    super(InitialPosition);
+    this.facing = position.facing;
     Rover.currentRover = this;
   }
 
-  getPosition() {
-    return this.position;
+  getPosition() : RoverPosition{
+    return {x:this.position.x, y:this.position.y, facing:this.facing};
   }
 
   move(cmd: Move[]): RoverPosition {
@@ -41,7 +39,7 @@ export class Rover {
         this.moveXY();
       }
     });
-    return this.position;
+    return {x:this.position.x, y:this.position.y, facing:this.facing};
   }
 
   private rotate(dirn: Rotate) {
@@ -54,10 +52,10 @@ export class Rover {
       rotateOffset = this.rotateDirn.length - 1;
     }
 
-    let currentDirnIndex = this.rotateDirn.indexOf(this.position.facing);
+    let currentDirnIndex = this.rotateDirn.indexOf(this.facing);
     currentDirnIndex =
       (currentDirnIndex + rotateOffset) % this.rotateDirn.length;
-    this.position.facing = this.rotateDirn[currentDirnIndex];
+    this.facing = this.rotateDirn[currentDirnIndex];
   }
 
   private moveXY() {
@@ -66,7 +64,7 @@ export class Rover {
       y: this.position.y,
     };
 
-    switch (this.position.facing) {
+    switch (this.facing) {
       case "N":
         currentPosition.y++;
         break;

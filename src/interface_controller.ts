@@ -1,10 +1,11 @@
 import { Grid } from "./grid";
 import { Rover } from "./rover";
+import { ThingOnMars } from "./thing_on_mars";
 
 import {XYPosition,RoverPosition, GridSize, Move} from "./types"
 
 export function setPlateauSizeCmd (size :GridSize){
-    Rover.plateau.setSize(size);
+    ThingOnMars.plateau.setSize(size);
 }
 
 export function placeRoverOnMarsCmd(position : RoverPosition) : RoverPosition{
