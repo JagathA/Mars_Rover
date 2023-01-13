@@ -4,13 +4,14 @@ import {
   moveRoverCmd,
 } from "./interface_controller";
 import { Rover } from "./rover";
+import { ThingOnMars } from "./thing_on_mars";
 import{Move} from "./types";
 
 describe("Check Plateau Creation cmd", () => {
   it("create and size plateau", () => {
     setPlateauSizeCmd({ x: 5, y: 5 });
 
-    expect(Rover.plateau.getSize()).toEqual({ x: 5, y: 5 });
+    expect(ThingOnMars.plateau.getSize()).toEqual({ x: 5, y: 5 });
   });
 });
 
