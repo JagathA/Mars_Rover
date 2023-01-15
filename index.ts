@@ -23,7 +23,6 @@ function runRovers(): void {
   print(" 0 = set Plateau Size");
   print(" 1 = set Rover Down");
   print(" 2 = move Rover");
-  print(" 3 = Exit");
 
   askQuestion(`Enter Your choice (0 .. 3) `, selectOperation);
 }
@@ -33,6 +32,7 @@ function selectOperation(choice: string) {
     case "0":
       askQuestion(`Enter Plateau Size: X Y `, setPlateauDimensions);
       break;
+
     case "1":
       if (ThingOnMars.plateau) {
         const plateauSize: GridSize = ThingOnMars.plateau.getSize();
@@ -43,6 +43,7 @@ function selectOperation(choice: string) {
         askQuestion(`Press Enter to continue `, runRovers);
       }
       break;
+
     case "2":
       if (Rover.getCurrentRover() && ThingOnMars.plateau) {
         const roverPosition: RoverPosition =
@@ -62,11 +63,10 @@ function selectOperation(choice: string) {
         askQuestion(`Press Enter to continue `, runRovers);
       }
       break;
-    case "E":
-      break;
+      
     default:
-    //default block statement;
-    
+		print(" Error :invalid choice");
+        askQuestion(`Press Enter to continue `, runRovers);
   }
 }
 
@@ -97,11 +97,10 @@ function setRoverDown(roverPosition: string) {
     xyValid(splitted.slice(0, 2)) &&
     orientationValid(splitted.slice(2, 3).join())
   ) {
-    
     const roverPosition: RoverPosition = placeRoverOnMarsCmd({
       x: parseInt(splitted[0]),
       y: parseInt(splitted[1]),
-      facing: <Direction>(splitted[2]),
+      facing: <Direction>splitted[2],
     });
     print(
       `Rover placed at : ${roverPosition.x}  ${roverPosition.y}  ${roverPosition.facing}`
@@ -119,7 +118,6 @@ function moveRover(moveCmd: string) {
       .length === 0 &&
     moveCmd.length !== 0
   ) {
-	
     const roverPosition: RoverPosition = moveRoverCmd(<Move[]>splitted);
     print(
       `Rover moved to : ${roverPosition.x}  ${roverPosition.y}  ${roverPosition.facing}`
