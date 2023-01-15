@@ -63,10 +63,10 @@ function selectOperation(choice: string) {
         askQuestion(`Press Enter to continue `, runRovers);
       }
       break;
-      
+
     default:
-		print(" Error :invalid choice");
-        askQuestion(`Press Enter to continue `, runRovers);
+      print(" Error :invalid choice");
+      askQuestion(`Press Enter to continue `, runRovers);
   }
 }
 

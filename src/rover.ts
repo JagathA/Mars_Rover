@@ -1,10 +1,10 @@
 import { Grid } from "./grid";
 
 import { XYPosition, RoverPosition, Move, Direction, Rotate } from "./types";
-import{ ThingOnMars} from"./thing_on_mars";
+import { ThingOnMars } from "./thing_on_mars";
 
-export class Rover extends ThingOnMars{
-  static currentRover : Rover;
+export class Rover extends ThingOnMars {
+  static currentRover: Rover;
 
   private readonly rotateDirn: Direction[] = ["N", "E", "S", "W"];
 
@@ -12,22 +12,21 @@ export class Rover extends ThingOnMars{
     return Rover.currentRover;
   }
 
-  static SetCurrentRover(rover:Rover) {
+  static SetCurrentRover(rover: Rover) {
     Rover.currentRover = rover;
   }
 
-  facing : Direction;
-
+  facing: Direction;
 
   constructor(position: RoverPosition) {
-    let InitialPosition : XYPosition = {x: position.x, y:position.y};
+    let InitialPosition: XYPosition = { x: position.x, y: position.y };
     super(InitialPosition);
     this.facing = position.facing;
     Rover.currentRover = this;
   }
 
-  getPosition() : RoverPosition{
-    return {x:this.position.x, y:this.position.y, facing:this.facing};
+  getPosition(): RoverPosition {
+    return { x: this.position.x, y: this.position.y, facing: this.facing };
   }
 
   move(cmd: Move[]): RoverPosition {
@@ -39,7 +38,7 @@ export class Rover extends ThingOnMars{
         this.moveXY();
       }
     });
-    return {x:this.position.x, y:this.position.y, facing:this.facing};
+    return { x: this.position.x, y: this.position.y, facing: this.facing };
   }
 
   private rotate(dirn: Rotate) {
@@ -77,12 +76,11 @@ export class Rover extends ThingOnMars{
         currentPosition.x--;
         break;
       default:
-
     }
 
     if (Rover.plateau.isWithin(currentPosition)) {
       this.position.x = currentPosition.x;
       this.position.y = currentPosition.y;
-    } 
+    }
   }
 }

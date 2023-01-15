@@ -5,7 +5,7 @@ import {
 } from "./interface_controller";
 import { Rover } from "./rover";
 import { ThingOnMars } from "./thing_on_mars";
-import{Move} from "./types";
+import { Move } from "./types";
 
 describe("Check Plateau Creation cmd", () => {
   it("create and size plateau", () => {
@@ -118,7 +118,6 @@ describe("Check Rover roatte Right", () => {
   });
 });
 
-
 describe("Check Rover move ", () => {
   it("Move North", () => {
     placeRoverOnMarsCmd({ x: 1, y: 0, facing: "N" });
@@ -159,20 +158,22 @@ describe("Check Rover move ", () => {
     placeRoverOnMarsCmd({ x: 0, y: 2, facing: "W" });
     expect(moveRoverCmd(["M"])).toEqual({ x: 0, y: 2, facing: "W" });
   });
-
 });
 
 describe("Check Rover move and Turn", () => {
   it("Move and Turn 1", () => {
-    setPlateauSizeCmd({ x: 5, y: 5 })
+    setPlateauSizeCmd({ x: 5, y: 5 });
     placeRoverOnMarsCmd({ x: 1, y: 2, facing: "N" });
-    expect(moveRoverCmd(["L","M","L","M","L","M","L","M","M"])).toEqual({ x: 1, y: 3, facing: "N" });
+    expect(moveRoverCmd(["L", "M", "L", "M", "L", "M", "L", "M", "M"])).toEqual(
+      { x: 1, y: 3, facing: "N" }
+    );
   });
 
   it("Move and Turn 1", () => {
-    setPlateauSizeCmd({ x: 5, y: 5 })
+    setPlateauSizeCmd({ x: 5, y: 5 });
     placeRoverOnMarsCmd({ x: 3, y: 3, facing: "E" });
-    expect(moveRoverCmd(["M","M","R","M","M","R","M","R","R","M"])).toEqual({ x: 5, y: 1, facing: "E" });
+    expect(
+      moveRoverCmd(["M", "M", "R", "M", "M", "R", "M", "R", "R", "M"])
+    ).toEqual({ x: 5, y: 1, facing: "E" });
   });
-
 });
