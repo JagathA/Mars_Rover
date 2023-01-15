@@ -1,9 +1,9 @@
 {
-  "include": ["./src/**/*"],
+  "include": ["./src/**/*", "index.ts", "build/console.js", "console.ts"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "target": "es2016", 
-    "module": "ES2015",                                  /* Specify what module code is generated. */
+    "module": "commonjs",                                /* Specify what module code is generated. */
     "rootDir": "./src",                                  /* Specify a file that bundles all outputs into one JavaScript file. If 'declaration' is true, also designates a file that bundles all .d.ts output. */
     "outDir": "./build",  
     "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
