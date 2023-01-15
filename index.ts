@@ -89,26 +89,6 @@ function setPlateauDimensions(plateauSize: string) {
   }
 }
 
-function convertToDirection(str: string): Direction {
-  let dirn: Direction = "N";
-  switch (str) {
-    case "N":
-      dirn = "N";
-      break;
-    case "E":
-      dirn = "E";
-      break;
-    case "S":
-      dirn = "S";
-      break;
-    case "W":
-      dirn = "W";
-      break;
-    default:
-  }
-  return dirn;
-}
-
 function setRoverDown(roverPosition: string) {
   const splitted = roverPosition.trim().split(" ");
 
@@ -121,7 +101,7 @@ function setRoverDown(roverPosition: string) {
     const roverPosition: RoverPosition = placeRoverOnMarsCmd({
       x: parseInt(splitted[0]),
       y: parseInt(splitted[1]),
-      facing: convertToDirection(splitted[2]),
+      facing: <Direction>(splitted[2]),
     });
     print(
       `Rover placed at : ${roverPosition.x}  ${roverPosition.y}  ${roverPosition.facing}`
@@ -139,22 +119,8 @@ function moveRover(moveCmd: string) {
       .length === 0 &&
     moveCmd.length !== 0
   ) {
-    let moveCmd: Move[] = [];
-    splitted.forEach((item) => {
-      switch (item) {
-        case "L":
-          moveCmd.push("L");
-          break;
-        case "R":
-          moveCmd.push("R");
-          break;
-        case "M":
-          moveCmd.push("M");
-          break;
-        default:
-      }
-    });
-    const roverPosition: RoverPosition = moveRoverCmd(moveCmd);
+	
+    const roverPosition: RoverPosition = moveRoverCmd(<Move[]>splitted);
     print(
       `Rover moved to : ${roverPosition.x}  ${roverPosition.y}  ${roverPosition.facing}`
     );
