@@ -66,7 +66,7 @@ function selectOperation(choice: string) {
       break;
     default:
     //default block statement;
-    //** raise error here */
+    
   }
 }
 
@@ -117,7 +117,7 @@ function setRoverDown(roverPosition: string) {
     xyValid(splitted.slice(0, 2)) &&
     orientationValid(splitted.slice(2, 3).join())
   ) {
-    //const roverDirn : Direction = "N";
+    
     const roverPosition: RoverPosition = placeRoverOnMarsCmd({
       x: parseInt(splitted[0]),
       y: parseInt(splitted[1]),

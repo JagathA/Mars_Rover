@@ -1,5 +1,5 @@
 import { Grid } from "./grid";
-//import { setPlateauSizeCmd } from "./interface_controller";
+
 import { XYPosition, RoverPosition, Move, Direction, Rotate } from "./types";
 import{ ThingOnMars} from"./thing_on_mars";
 
@@ -46,7 +46,6 @@ export class Rover extends ThingOnMars{
     let rotateOffset: number = 0;
 
     if (dirn === "R") {
-      // *** can improve here
       rotateOffset = 1;
     } else {
       rotateOffset = this.rotateDirn.length - 1;
@@ -78,15 +77,12 @@ export class Rover extends ThingOnMars{
         currentPosition.x--;
         break;
       default:
-      //default block statement;
-      //** raise error here */
+
     }
 
     if (Rover.plateau.isWithin(currentPosition)) {
       this.position.x = currentPosition.x;
       this.position.y = currentPosition.y;
-    } else {
-      // out of limits - raise error ?
-    }
+    } 
   }
 }
