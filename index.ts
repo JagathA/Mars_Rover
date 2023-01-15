@@ -20,11 +20,11 @@ function runRovers(): void {
   print("--------------------------");
   print("| Rovers On ! |");
   print("--------------------------");
-  print(" 0 = set Plateau Size");
-  print(" 1 = set Rover Down");
-  print(" 2 = move Rover");
+  print(" 0 = Set Plateau Size");
+  print(" 1 = Set Rover Down");
+  print(" 2 = Move Rover");
 
-  askQuestion(`Enter Your choice (0 .. 3) `, selectOperation);
+  askQuestion(`Enter Your choice (0 .. 2) `, selectOperation);
 }
 
 function selectOperation(choice: string) {
